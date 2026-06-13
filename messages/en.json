@@ -77,6 +77,12 @@
     "11": "November",
     "12": "December"
   },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
   "language": {
     "label": "Language",
     "mk": "Македонски",

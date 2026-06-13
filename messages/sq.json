@@ -77,6 +77,12 @@
     "11": "nëntor",
     "12": "dhjetor"
   },
+  "theme": {
+    "label": "Tema",
+    "system": "Sistemi",
+    "light": "E çelët",
+    "dark": "E errët"
+  },
   "language": {
     "label": "Gjuha",
     "mk": "Македонски",

@@ -38,8 +38,19 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/* Apply the saved theme before paint to avoid a flash of the wrong theme.
+            No stored value (or "system") leaves it to prefers-color-scheme. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}})();",
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>
       </body>

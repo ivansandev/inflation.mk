@@ -23,8 +23,11 @@
   --radius: 0.75rem;
 }
 
+/* Dark palette. Applied when the OS prefers dark and the user hasn't forced
+   light (system default), or when the user explicitly chooses dark. The
+   [data-theme] attribute is set by the theme toggle / the no-FOUC head script. */
 @media (prefers-color-scheme: dark) {
-  @theme {
+  :root:not([data-theme="light"]) {
     --color-background: #0a0a0a;
     --color-surface: #111113;
     --color-surface-2: #18181b;
@@ -37,6 +40,20 @@
     --color-up: #ff6a5a;
     --color-down: #4ec96a;
   }
+}
+
+:root[data-theme="dark"] {
+  --color-background: #0a0a0a;
+  --color-surface: #111113;
+  --color-surface-2: #18181b;
+  --color-foreground: #ededed;
+  --color-muted: #8a8a93;
+  --color-faint: #5a5a63;
+  --color-line: #232326;
+  --color-line-strong: #303034;
+  --color-accent: #5b9dff;
+  --color-up: #ff6a5a;
+  --color-down: #4ec96a;
 }
 
 * {

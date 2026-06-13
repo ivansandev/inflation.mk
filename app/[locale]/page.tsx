@@ -3,6 +3,7 @@ import { getCpi } from "@/lib/pxweb";
 import { formatDate, monthLabel } from "@/lib/format";
 import Calculator from "@/components/Calculator";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default async function Home({
   params,
@@ -25,13 +26,14 @@ export default async function Home({
         >
           inflation<span className="text-faint">.mk</span>
         </a>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-3 sm:gap-4">
           <a
             href="#methodology"
             className="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
           >
             {t("header.nav")}
           </a>
+          <ThemeToggle />
           <LanguageSwitcher />
         </div>
       </header>
