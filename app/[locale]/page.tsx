@@ -2,8 +2,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getCpi } from "@/lib/pxweb";
 import { formatDate, monthLabel } from "@/lib/format";
 import Calculator from "@/components/Calculator";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ThemeToggle from "@/components/ThemeToggle";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 
 export default async function Home({
   params,
@@ -18,25 +18,7 @@ export default async function Home({
 
   return (
     <div className="mx-auto flex min-h-full max-w-5xl flex-col px-5 sm:px-8">
-      <header className="flex items-center justify-between py-6">
-        <a
-          href="#top"
-          className="text-base font-semibold tracking-tight"
-          aria-label="inflation.mk"
-        >
-          inflation<span className="text-faint">.mk</span>
-        </a>
-        <div className="flex items-center gap-3 sm:gap-4">
-          <a
-            href="#methodology"
-            className="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
-          >
-            {t("header.nav")}
-          </a>
-          <ThemeToggle />
-          <LanguageSwitcher />
-        </div>
-      </header>
+      <SiteHeader active="home" />
 
       <main id="top" className="flex-1 py-10 sm:py-16">
         <p className="mb-10 max-w-xl text-balance text-base leading-relaxed text-muted sm:text-lg">
@@ -84,23 +66,7 @@ export default async function Home({
         </section>
       </main>
 
-      <footer className="border-t border-line py-8 text-xs text-faint">
-        <p>
-          {t.rich("footer.attribution", {
-            link: (chunks) => (
-              <a
-                href={data.sourceUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-muted underline decoration-line-strong underline-offset-2 transition-colors hover:text-foreground"
-              >
-                {chunks}
-              </a>
-            ),
-          })}
-        </p>
-        <p className="mt-1">{t("footer.note")}</p>
-      </footer>
+      <SiteFooter data={data} />
     </div>
   );
 }

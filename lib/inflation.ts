@@ -159,6 +159,39 @@ export function inflationSeries(
   return points;
 }
 
+export interface DivisionPoint {
+  /** Month code, e.g. "2026M05". */
+  month: string;
+  /** This division's year-over-year change that month, in percent. */
+  value: number;
+  /** Official headline CPI that month, in percent. */
+  official: number;
+}
+
+/**
+ * Year-over-year change for a single official ECOICOP division each month,
+ * alongside the headline rate, for plotting a per-category time series. Unlike
+ * inflationSeries this is independent of the user's basket — it reads the raw
+ * official division index directly.
+ *
+ * Defaults to the trailing 5 years (60 months) ending at the latest month.
+ * Months where either the division or the headline total is missing are skipped.
+ */
+export function divisionSeries(
+  data: CpiData,
+  division: string,
+  months: string[] = data.months.slice(-60),
+): DivisionPoint[] {
+  const points: DivisionPoint[] = [];
+  for (const month of months) {
+    const value = yoyPercent(data, division, month);
+    const official = yoyPercent(data, "total", month);
+    if (value == null || official == null) continue;
+    points.push({ month, value, official });
+  }
+  return points;
+}
+
 /** "2026M05" → { year: 2026, month: 5 } (1-based). */
 export function parseMonth(code: string): { year: number; month: number } {
   const [y, m] = code.split("M");

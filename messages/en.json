@@ -1,10 +1,13 @@
 {
   "meta": {
     "title": "inflation.mk — Your personal inflation",
-    "description": "Build your own basket and see your personal inflation rate for North Macedonia, using official data from the State Statistical Office."
+    "description": "Build your own basket and see your personal inflation rate for North Macedonia, using official data from the State Statistical Office.",
+    "breakdownTitle": "inflation.mk — Inflation by category"
   },
   "header": {
-    "nav": "How it works"
+    "nav": "How it works",
+    "calculator": "Calculator",
+    "byCategory": "By category"
   },
   "hero": {
     "eyebrow": "Your personal inflation",
@@ -18,6 +21,11 @@
   "chart": {
     "title": "How your inflation tracked the official rate",
     "subtitle": "Your current basket, applied to the last 10 years of official prices, next to the official rate."
+  },
+  "breakdown": {
+    "title": "Inflation by category",
+    "subtitle": "How prices in each part of the official basket have moved over the last 5 years, next to the headline rate. Sorted by the latest year-on-year change.",
+    "legendCategory": "Category"
   },
   "basket": {
     "title": "Your basket",
@@ -49,6 +57,21 @@
     "clothing": "Clothing",
     "eating_out": "Eating out",
     "leisure": "Leisure & fun"
+  },
+  "divisions": {
+    "food": "Food & drinks",
+    "alcohol_tobacco": "Alcohol & tobacco",
+    "clothing": "Clothing & footwear",
+    "housing": "Housing & utilities",
+    "furnishings": "Furnishings & household",
+    "health": "Health",
+    "transport": "Transport",
+    "communications": "Communications",
+    "recreation": "Recreation & culture",
+    "education": "Education",
+    "restaurants": "Restaurants & hotels",
+    "insurance_finance": "Insurance & finance",
+    "personal_misc": "Personal care & misc"
   },
   "methodology": {
     "title": "How it works",
