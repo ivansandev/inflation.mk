@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "title": "inflation.mk — Inflacioni juaj personal",
+    "description": "Ndërto shportën tënde dhe shih normën tënde personale të inflacionit në Maqedoninë e Veriut, me të dhëna zyrtare nga Enti Shtetëror i Statistikës."
+  },
+  "header": {
+    "nav": "Si funksionon"
+  },
+  "hero": {
+    "eyebrow": "Inflacioni juaj personal",
+    "asOf": "deri më {month}",
+    "subtitle": "Shumica e njerëzve nuk shpenzojnë si mesatarja kombëtare — ku vetëm ushqimi zë 40% të shportës. Cakto si shpenzon vërtet dhe shih normën tënde të inflacionit.",
+    "officialLabel": "Inflacioni zyrtar",
+    "vsHigher": "{pp} pp më lart se zyrtari",
+    "vsLower": "{pp} pp më ulët se zyrtari",
+    "vsEqual": "njësoj si norma zyrtare"
+  },
+  "basket": {
+    "title": "Shporta jote",
+    "hint": "Tërhiq çdo rrëshqitës sipas mënyrës si shpenzon. Pjesët janë relative dhe gjithmonë mblidhen në 100%.",
+    "reset": "Rikthe parazgjedhjen",
+    "useOfficial": "Përdor peshat zyrtare",
+    "shareLabel": "pjesë",
+    "yoyLabel": "nga viti në vit",
+    "weightAria": "{category} — pjesa e shpenzimeve të tua"
+  },
+  "buckets": {
+    "essential": "Thelbësore",
+    "quality": "Cilësia e jetës",
+    "essentialDesc": "Gjëra që të duhen për të jetuar",
+    "qualityDesc": "Gjëra që e bëjnë jetën më të mirë",
+    "shareSuffix": "e shportës"
+  },
+  "categories": {
+    "food": "Ushqime dhe pije joalkoolike",
+    "alcohol_tobacco": "Alkool dhe duhan",
+    "clothing": "Veshje dhe këpucë",
+    "housing": "Banimi dhe shërbimet komunale",
+    "furnishings": "Pajisje shtëpiake",
+    "health": "Shëndetësia",
+    "transport": "Transporti",
+    "communications": "Informacioni dhe komunikimi",
+    "recreation": "Argëtimi, sporti dhe kultura",
+    "education": "Arsimi",
+    "restaurants": "Restorante dhe akomodim",
+    "insurance_finance": "Sigurime dhe financa",
+    "personal_misc": "Kujdesi personal dhe të tjera"
+  },
+  "methodology": {
+    "title": "Si funksionon",
+    "body1": "Inflacioni zyrtar përdor një shportë të vetme për gjithë vendin, ku vetëm ushqimi zë rreth 40%. Shpenzimet e tua gati me siguri duken ndryshe.",
+    "body2": "Cakto sa nga shpenzimet e tua shkojnë për çdo kategori. Marrim ndryshimin zyrtar vjetor të çmimeve për çdo kategori dhe e shumëzojmë me pjesën tënde për të nxjerrë normën tënde personale.",
+    "body3": "Si parazgjedhje, gjërat thelbësore — ushqimi, banimi, transporti, shëndetësia e të tjera — zënë rreth 75% të shportës, kurse shpenzimet për cilësi jete — ngrënia jashtë, argëtimi, pushimet — rreth 25%. Ndrysho lirisht, ose ngarko peshat zyrtare kombëtare për krahasim.",
+    "classificationLabel": "Klasifikimi",
+    "weightsLabel": "Peshat zyrtare",
+    "updatedLabel": "Të dhënat e fundit",
+    "dataLabel": "Të dhënat"
+  },
+  "footer": {
+    "attribution": "Burimi: <link>Enti Shtetëror i Statistikës i Republikës së Maqedonisë së Veriut</link>.",
+    "sourceName": "Enti Shtetëror i Statistikës i Republikës së Maqedonisë së Veriut",
+    "live": "të dhëna të drejtpërdrejta",
+    "cached": "kopje e ruajtur",
+    "note": "Projekt i pavarur. Nuk lidhet me Entin Shtetëror të Statistikës."
+  },
+  "months": {
+    "1": "janar",
+    "2": "shkurt",
+    "3": "mars",
+    "4": "prill",
+    "5": "maj",
+    "6": "qershor",
+    "7": "korrik",
+    "8": "gusht",
+    "9": "shtator",
+    "10": "tetor",
+    "11": "nëntor",
+    "12": "dhjetor"
+  },
+  "language": {
+    "label": "Gjuha",
+    "mk": "Македонски",
+    "en": "English",
+    "sq": "Shqip"
+  }
+}

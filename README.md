@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# inflation.mk
 
-## Getting Started
+A personalized inflation calculator for North Macedonia. The official Consumer
+Price Index uses a single national-average basket where **food alone is ~40%** —
+which rarely matches how any individual actually lives. This app lets you compose
+**your own basket** across the official spending categories and see **your personal
+year-over-year inflation** next to the official rate.
 
-First, run the development server:
+Trilingual: **Македонски** (default), **English**, **Shqip**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Data
+
+All figures come from the official **State Statistical Office of the Republic of
+North Macedonia** (Државен завод за статистика), via the open
+[MakStat PXWeb API](https://makstat.stat.gov.mk/PXWeb/pxweb/en/MakStat/MakStat__Ceni__IndeksTrosZivot__TrosociZivot/):
+
+- Consumer Price Index by **ECOICOP version 2** (13 divisions), monthly, latest
+  year-over-year — table `121_CeniTr_Mk_IndTroZi_ecoicop_ml.px`.
+- Official **CPI weight structure** — table `132_CeniTr_Mk_Ponderi_ml.px`.
+
+Data is fetched live and cached for 24h. If the official API is unreachable, the
+app falls back to a bundled snapshot (`data/cpi-snapshot.json`).
+
+> **Source: State Statistical Office of the Republic of North Macedonia.**
+> Independent project, not affiliated with the State Statistical Office.
+
+## How the number is computed
+
+Personal inflation is the weighted average of each category's official
+year-over-year price change, using your basket weights:
+
+```
+personalRate% = ( Σ(weightᵢ · indexᵢ) / Σ(weightᵢ) ) − 100
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The default basket follows a **75% essentials / 25% quality-of-life** split.
+"Use official weights" loads the national CPI weights, which reproduces the
+official headline rate.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Develop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev          # http://localhost:3000
+```
 
-## Learn More
+Refresh the bundled offline fallback from the live API:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+node scripts/make-snapshot.mjs
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build & self-host
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app builds to a standalone Node server (`output: "standalone"`).
 
-## Deploy on Vercel
+```bash
+npm run build
+node .next/standalone/server.js     # serves on PORT (default 3000)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Docker
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+docker build -t inflation-mk .
+docker run -p 3000:3000 inflation-mk
+```
+
+## Stack
+
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 ·
+[next-intl](https://next-intl.dev) for i18n · [Geist](https://vercel.com/font)
+(self-hosted, full Cyrillic + Latin coverage).

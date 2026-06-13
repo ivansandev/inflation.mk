@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "title": "inflation.mk — Your personal inflation",
+    "description": "Build your own basket and see your personal inflation rate for North Macedonia, using official data from the State Statistical Office."
+  },
+  "header": {
+    "nav": "How it works"
+  },
+  "hero": {
+    "eyebrow": "Your personal inflation",
+    "asOf": "as of {month}",
+    "subtitle": "Most people don't spend like the national average — where food alone is 40% of the basket. Set how you actually spend and see your own inflation rate.",
+    "officialLabel": "Official CPI",
+    "vsHigher": "{pp} pp higher than official",
+    "vsLower": "{pp} pp lower than official",
+    "vsEqual": "in line with the official rate"
+  },
+  "basket": {
+    "title": "Your basket",
+    "hint": "Drag each slider to match how you spend. Shares are relative and always add up to 100%.",
+    "reset": "Reset to default",
+    "useOfficial": "Use official weights",
+    "shareLabel": "share",
+    "yoyLabel": "year on year",
+    "weightAria": "{category} — share of your spending"
+  },
+  "buckets": {
+    "essential": "Essentials",
+    "quality": "Quality of life",
+    "essentialDesc": "Things you need to live",
+    "qualityDesc": "Things that make life better",
+    "shareSuffix": "of basket"
+  },
+  "categories": {
+    "food": "Food & non-alcoholic drinks",
+    "alcohol_tobacco": "Alcohol & tobacco",
+    "clothing": "Clothing & footwear",
+    "housing": "Housing & utilities",
+    "furnishings": "Furnishings & household",
+    "health": "Health",
+    "transport": "Transport",
+    "communications": "Information & communication",
+    "recreation": "Recreation, sport & culture",
+    "education": "Education",
+    "restaurants": "Restaurants & accommodation",
+    "insurance_finance": "Insurance & finance",
+    "personal_misc": "Personal care & other"
+  },
+  "methodology": {
+    "title": "How it works",
+    "body1": "Official inflation uses a single basket for the whole country, in which food alone is about 40%. Your spending almost certainly looks different.",
+    "body2": "Set how much of your spending goes to each category. We take each category's official year-over-year price change and weight it by your share to get your personal rate.",
+    "body3": "By default, essentials — food, housing, transport, health and so on — make up about 75% of the basket, and quality-of-life spending — eating out, recreation, holidays — about 25%. Adjust freely, or load the official national weights to compare.",
+    "classificationLabel": "Classification",
+    "weightsLabel": "Official weights",
+    "updatedLabel": "Latest data",
+    "dataLabel": "Data"
+  },
+  "footer": {
+    "attribution": "Source: <link>State Statistical Office of the Republic of North Macedonia</link>.",
+    "sourceName": "State Statistical Office of the Republic of North Macedonia",
+    "live": "live data",
+    "cached": "cached snapshot",
+    "note": "An independent project. Not affiliated with the State Statistical Office."
+  },
+  "months": {
+    "1": "January",
+    "2": "February",
+    "3": "March",
+    "4": "April",
+    "5": "May",
+    "6": "June",
+    "7": "July",
+    "8": "August",
+    "9": "September",
+    "10": "October",
+    "11": "November",
+    "12": "December"
+  },
+  "language": {
+    "label": "Language",
+    "mk": "Македонски",
+    "en": "English",
+    "sq": "Shqip"
+  }
+}
