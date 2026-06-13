@@ -12,7 +12,7 @@ import {
   type Weights,
 } from "@/lib/categories";
 import { bucketShare, computeInflation } from "@/lib/inflation";
-import { formatPercent } from "@/lib/format";
+import { formatMoney, formatPercent } from "@/lib/format";
 import CategoryRow from "@/components/CategoryRow";
 import ResultHeadline from "@/components/ResultHeadline";
 
@@ -31,6 +31,9 @@ export default function Calculator({
 }) {
   const t = useTranslations();
   const [weights, setWeights] = useState<Weights>(defaultWeights);
+  // Total monthly spending in денари. Display-only: it scales the per-category
+  // amounts but never feeds into the inflation calculation.
+  const [budget, setBudget] = useState(40000);
 
   const result = useMemo(
     () => computeInflation(data, weights),
@@ -87,6 +90,33 @@ export default function Calculator({
           </div>
         </div>
 
+        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <label htmlFor="budget" className="text-sm text-muted">
+            {t("basket.budgetLabel")}
+          </label>
+          <div className="flex items-center gap-2 rounded-lg border border-line-strong px-3 py-1.5 focus-within:border-foreground">
+            <input
+              id="budget"
+              type="number"
+              inputMode="numeric"
+              min={0}
+              step={500}
+              value={budget}
+              aria-label={t("basket.amountAria")}
+              onChange={(e) =>
+                setBudget(
+                  Number.isNaN(e.target.valueAsNumber)
+                    ? 0
+                    : Math.max(0, Math.round(e.target.valueAsNumber)),
+                )
+              }
+              className="num w-24 bg-transparent text-sm text-foreground outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            />
+            <span className="text-xs text-faint">{t("basket.currency")}</span>
+          </div>
+          <span className="text-xs text-faint">{t("basket.perMonth")}</span>
+        </div>
+
         <div className="mt-8 grid gap-x-12 gap-y-10 lg:grid-cols-2">
           {BUCKETS.map((bucket) => (
             <section key={bucket}>
@@ -106,6 +136,14 @@ export default function Calculator({
                   <p className="text-[0.7rem] text-faint">
                     {t("buckets.shareSuffix")}
                   </p>
+                  <p className="num mt-0.5 text-[0.7rem] text-muted">
+                    {"≈ "}
+                    {formatMoney(
+                      (shareByBucket[bucket] / 100) * budget,
+                      locale,
+                    )}{" "}
+                    {t("basket.currency")} {t("basket.perMonth")}
+                  </p>
                 </div>
               </header>
 
@@ -119,9 +157,12 @@ export default function Calculator({
                       code={c.code}
                       name={name}
                       weight={weights[c.key] ?? 0}
+                      defaultWeight={c.defaultWeight}
                       share={row.share}
                       yoy={row.yoy}
                       official={result.official}
+                      cadence={c.cadence}
+                      budget={budget}
                       locale={locale}
                       ariaLabel={t("basket.weightAria", { category: name })}
                       onChange={(v) => setWeight(c.key, v)}

@@ -17,12 +17,17 @@
   },
   "basket": {
     "title": "Shporta jote",
-    "hint": "Tërhiq çdo rrëshqitës sipas mënyrës si shpenzon. Pjesët janë relative dhe gjithmonë mblidhen në 100%.",
+    "hint": "Çdo rrëshqitës nis nga familja mesatare — tërhiqe majtas ose djathtas sipas mënyrës si shpenzon, pastaj vendos buxhetin mujor për të parë sa është secila pjesë në para. Pjesët janë relative dhe gjithmonë mblidhen në 100%.",
     "reset": "Rikthe parazgjedhjen",
     "useOfficial": "Përdor peshat zyrtare",
     "shareLabel": "pjesë",
     "yoyLabel": "nga viti në vit",
-    "weightAria": "{category} — pjesa e shpenzimeve të tua"
+    "weightAria": "{category} — pjesa e shpenzimeve të tua",
+    "budgetLabel": "Buxheti mujor",
+    "currency": "den",
+    "perDay": "në ditë",
+    "perMonth": "në muaj",
+    "amountAria": "Buxheti mujor në denarë"
   },
   "buckets": {
     "essential": "Thelbësore",

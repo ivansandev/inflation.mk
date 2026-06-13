@@ -26,6 +26,20 @@ export function formatSignedPercent(
   return `${sign}${fixed(Math.abs(value), locale, digits)}%`;
 }
 
+/** Money with thousands grouping, e.g. "11,200" / "11.200" / "7.200".
+ *  Deterministic (no Intl): integer part is grouped by hand so server and
+ *  client render the same string. Locale picks the separators — mk/sq use
+ *  "." for thousands and "," for decimals; en uses "," and ".". */
+export function formatMoney(value: number, locale: string, digits = 0): string {
+  const comma = COMMA_DECIMAL.has(locale);
+  const thousands = comma ? "." : ",";
+  const negative = value < 0;
+  const [intPart, fracPart] = Math.abs(value).toFixed(digits).split(".");
+  const grouped = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, thousands);
+  const decimal = digits > 0 ? (comma ? "," : ".") + fracPart : "";
+  return `${negative ? "-" : ""}${grouped}${decimal}`;
+}
+
 /** Unsigned percent, e.g. "28%" / "5.0%" / "5,0%". */
 export function formatPercent(
   value: number,

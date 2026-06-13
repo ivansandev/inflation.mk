@@ -17,12 +17,17 @@
   },
   "basket": {
     "title": "Your basket",
-    "hint": "Drag each slider to match how you spend. Shares are relative and always add up to 100%.",
+    "hint": "Each slider starts at the average household — drag left or right to match how you spend, then set your monthly budget to see each share in real money. Shares are relative and always add up to 100%.",
     "reset": "Reset to default",
     "useOfficial": "Use official weights",
     "shareLabel": "share",
     "yoyLabel": "year on year",
-    "weightAria": "{category} — share of your spending"
+    "weightAria": "{category} — share of your spending",
+    "budgetLabel": "Monthly budget",
+    "currency": "MKD",
+    "perDay": "per day",
+    "perMonth": "per month",
+    "amountAria": "Monthly budget in denars"
   },
   "buckets": {
     "essential": "Essentials",
