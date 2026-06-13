@@ -41,19 +41,14 @@
     "shareSuffix": "e shportës"
   },
   "categories": {
-    "food": "Ushqime dhe pije joalkoolike",
-    "alcohol_tobacco": "Alkool dhe duhan",
-    "clothing": "Veshje dhe këpucë",
-    "housing": "Banimi dhe shërbimet komunale",
-    "furnishings": "Pajisje shtëpiake",
-    "health": "Shëndetësia",
+    "groceries": "Ushqime",
+    "housing": "Banimi dhe faturat",
     "transport": "Transporti",
-    "communications": "Informacioni dhe komunikimi",
-    "recreation": "Argëtimi, sporti dhe kultura",
-    "education": "Arsimi",
-    "restaurants": "Restorante dhe akomodim",
-    "insurance_finance": "Sigurime dhe financa",
-    "personal_misc": "Kujdesi personal dhe të tjera"
+    "connectivity": "Telefon & internet",
+    "health": "Shëndeti & kujdesi",
+    "clothing": "Veshje",
+    "eating_out": "Të ngrënit jashtë",
+    "leisure": "Argëtim & kohë e lirë"
   },
   "methodology": {
     "title": "Si funksionon",

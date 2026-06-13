@@ -41,19 +41,14 @@
     "shareSuffix": "of basket"
   },
   "categories": {
-    "food": "Food & non-alcoholic drinks",
-    "alcohol_tobacco": "Alcohol & tobacco",
-    "clothing": "Clothing & footwear",
-    "housing": "Housing & utilities",
-    "furnishings": "Furnishings & household",
-    "health": "Health",
+    "groceries": "Groceries",
+    "housing": "Housing & bills",
     "transport": "Transport",
-    "communications": "Information & communication",
-    "recreation": "Recreation, sport & culture",
-    "education": "Education",
-    "restaurants": "Restaurants & accommodation",
-    "insurance_finance": "Insurance & finance",
-    "personal_misc": "Personal care & other"
+    "connectivity": "Phone & internet",
+    "health": "Health & care",
+    "clothing": "Clothing",
+    "eating_out": "Eating out",
+    "leisure": "Leisure & fun"
   },
   "methodology": {
     "title": "How it works",

@@ -39,6 +39,33 @@ function yoyPercent(data: CpiData, key: string, month: string): number | null {
   return idx == null ? null : idx - 100;
 }
 
+// Combined year-over-year change for a high-level category: the official-weight-
+// weighted average of its constituent ECOICOP divisions (the same way a
+// statistical office rolls sub-indices up into a group, so it stays official).
+// Divisions with no data for the month are dropped; returns null if none remain.
+// Falls back to a simple average if official weights are somehow all zero.
+function categoryYoy(
+  data: CpiData,
+  divisions: string[],
+  month: string,
+): number | null {
+  let weightSum = 0;
+  let weighted = 0;
+  let plainSum = 0;
+  let count = 0;
+  for (const div of divisions) {
+    const yoy = yoyPercent(data, div, month);
+    if (yoy == null) continue;
+    const w = data.officialWeights[div] ?? 0;
+    weightSum += w;
+    weighted += w * yoy;
+    plainSum += yoy;
+    count += 1;
+  }
+  if (count === 0) return null;
+  return weightSum > 0 ? weighted / weightSum : plainSum / count;
+}
+
 // Weighted-average personal rate for a single month — the same formula as
 // computeInflation, without building per-category rows. Used by inflationSeries
 // so the chart line and the headline can never compute the rate differently.
@@ -48,7 +75,7 @@ function personalRate(data: CpiData, weights: Weights, month: string): number {
   for (const c of CATEGORIES) {
     const w = weights[c.key] ?? 0;
     if (w <= 0) continue;
-    const yoy = yoyPercent(data, c.key, month);
+    const yoy = categoryYoy(data, c.divisions, month);
     if (yoy == null) continue;
     weightSum += w;
     weighted += w * yoy;
@@ -61,16 +88,20 @@ export function computeInflation(
   weights: Weights,
   month: string = data.latestMonth,
 ): InflationResult {
+  const yoyByKey = new Map<string, number | null>(
+    CATEGORIES.map((c) => [c.key, categoryYoy(data, c.divisions, month)]),
+  );
+
   let weightSum = 0;
   for (const c of CATEGORIES) {
     const w = weights[c.key] ?? 0;
-    if (w > 0 && data.yoy[c.key]?.[month] != null) weightSum += w;
+    if (w > 0 && yoyByKey.get(c.key) != null) weightSum += w;
   }
 
   let rate = 0;
   const rows: CategoryResult[] = CATEGORIES.map((c) => {
     const weight = weights[c.key] ?? 0;
-    const yoy = yoyPercent(data, c.key, month);
+    const yoy = yoyByKey.get(c.key) ?? null;
     const usable = weight > 0 && yoy != null;
     const share = usable && weightSum > 0 ? (weight / weightSum) * 100 : 0;
     const contribution = usable ? (weight / weightSum) * yoy! : 0;

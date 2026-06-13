@@ -1,8 +1,31 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import {
+  Bus,
+  HeartPulse,
+  House,
+  PartyPopper,
+  Shirt,
+  ShoppingBasket,
+  Smartphone,
+  UtensilsCrossed,
+  type LucideIcon,
+} from "lucide-react";
 import { DAYS_PER_MONTH, type Cadence } from "@/lib/categories";
 import { formatMoney, formatPercent, formatSignedPercent } from "@/lib/format";
+
+// Maps a category's `icon` name (lib/categories.ts) to its lucide glyph.
+const ICONS: Record<string, LucideIcon> = {
+  ShoppingBasket,
+  House,
+  Bus,
+  Smartphone,
+  HeartPulse,
+  Shirt,
+  UtensilsCrossed,
+  PartyPopper,
+};
 
 const SLIDER_STEPS = 100;
 // Each slider runs from 0× (100% below the average) up to 5× the category's
@@ -12,7 +35,7 @@ const MAX_MULTIPLE = 5;
 const AVERAGE_POSITION = SLIDER_STEPS / MAX_MULTIPLE; // 20
 
 export default function CategoryRow({
-  code,
+  icon,
   name,
   weight,
   defaultWeight,
@@ -25,7 +48,7 @@ export default function CategoryRow({
   ariaLabel,
   onChange,
 }: {
-  code: number;
+  icon: string;
   name: string;
   weight: number;
   defaultWeight: number;
@@ -84,15 +107,14 @@ export default function CategoryRow({
   const handlePosition = (pos: number) =>
     onChange(defaultWeight > 0 ? (defaultWeight * pos) / AVERAGE_POSITION : pos);
 
-  return (
-    <div className="py-3 sm:grid sm:grid-cols-[2.1rem_minmax(0,1fr)_9.5rem_3.2rem] sm:items-center sm:gap-x-4">
-      <span className="num hidden text-[0.7rem] text-faint sm:block">
-        {String(code).padStart(2, "0")}
-      </span>
+  const Icon = ICONS[icon] ?? ShoppingBasket;
 
-      {/* Name + YoY badge; on mobile the share sits to the right on the same line. */}
+  return (
+    <div className="py-3 sm:grid sm:grid-cols-[minmax(0,1fr)_9.5rem_3.2rem] sm:items-center sm:gap-x-4">
+      {/* Icon + name + YoY badge; on mobile the share sits to the right on the same line. */}
       <div className="flex items-baseline justify-between gap-3 sm:block sm:justify-start">
-        <div className="flex min-w-0 items-baseline gap-2">
+        <div className="flex min-w-0 items-center gap-2">
+          <Icon className="size-4 shrink-0 text-muted" aria-hidden />
           <span className="truncate text-sm text-foreground">{name}</span>
           <span className={`num shrink-0 text-xs ${yoyColor}`}>{yoyText}</span>
         </div>

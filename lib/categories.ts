@@ -1,14 +1,19 @@
-// The 13 ECOICOP v2 divisions, grouped into "essentials" and "quality of life",
-// with the default personal basket (≈75% essentials / ≈25% quality of life).
+// Eight high-level, everyday spending categories, grouped into "essentials" and
+// "quality of life", with the default personal basket (≈75% essentials / ≈25%
+// quality of life).
 //
-// `key` matches the keys in CpiData (lib/cpi-source.mjs); `code` is the ECOICOP
-// division number, shown as a small chip. Display names live in messages/*.json
-// under `categories.<key>` so they translate per locale.
+// Each category aggregates one or more official ECOICOP v2 divisions (the
+// `divisions` keys match CpiData in lib/cpi-source.mjs). A category's combined
+// year-over-year change is the official-weight-weighted average of its divisions
+// (see lib/inflation.ts), so the figures stay official while the basket reads
+// like how people actually think about spending. Display names live in
+// messages/*.json under `categories.<key>` so they translate per locale; `icon`
+// names a lucide-react glyph rendered left of the label.
 
 export type Bucket = "essential" | "quality";
 
 /** Whether a category's spending is naturally felt per day (groceries, fares,
- *  coffee) or per month (rent, bills, insurance). Drives the денар caption unit. */
+ *  coffee) or per month (rent, bills, subscriptions). Drives the денар caption unit. */
 export type Cadence = "daily" | "monthly";
 
 /** Days per month used to convert a monthly amount into a per-day figure. */
@@ -16,7 +21,10 @@ export const DAYS_PER_MONTH = 365 / 12;
 
 export interface Category {
   key: string;
-  code: number;
+  /** ECOICOP division keys this category aggregates (keys into CpiData.yoy). */
+  divisions: string[];
+  /** lucide-react icon name, rendered left of the label. */
+  icon: string;
   bucket: Bucket;
   /** Natural unit for showing this category's денар amount. */
   cadence: Cadence;
@@ -25,19 +33,14 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { key: "food", code: 1, bucket: "essential", cadence: "daily", defaultWeight: 28 },
-  { key: "alcohol_tobacco", code: 2, bucket: "quality", cadence: "daily", defaultWeight: 5 },
-  { key: "clothing", code: 3, bucket: "essential", cadence: "monthly", defaultWeight: 4 },
-  { key: "housing", code: 4, bucket: "essential", cadence: "monthly", defaultWeight: 18 },
-  { key: "furnishings", code: 5, bucket: "essential", cadence: "monthly", defaultWeight: 3 },
-  { key: "health", code: 6, bucket: "essential", cadence: "monthly", defaultWeight: 5 },
-  { key: "transport", code: 7, bucket: "essential", cadence: "daily", defaultWeight: 9 },
-  { key: "communications", code: 8, bucket: "essential", cadence: "monthly", defaultWeight: 5 },
-  { key: "recreation", code: 9, bucket: "quality", cadence: "monthly", defaultWeight: 9 },
-  { key: "education", code: 10, bucket: "essential", cadence: "monthly", defaultWeight: 1 },
-  { key: "restaurants", code: 11, bucket: "quality", cadence: "daily", defaultWeight: 11 },
-  { key: "insurance_finance", code: 12, bucket: "essential", cadence: "monthly", defaultWeight: 1 },
-  { key: "personal_misc", code: 13, bucket: "essential", cadence: "monthly", defaultWeight: 1 },
+  { key: "groceries", divisions: ["food"], icon: "ShoppingBasket", bucket: "essential", cadence: "daily", defaultWeight: 28 },
+  { key: "housing", divisions: ["housing", "furnishings"], icon: "House", bucket: "essential", cadence: "monthly", defaultWeight: 21 },
+  { key: "transport", divisions: ["transport"], icon: "Bus", bucket: "essential", cadence: "daily", defaultWeight: 9 },
+  { key: "connectivity", divisions: ["communications"], icon: "Smartphone", bucket: "essential", cadence: "monthly", defaultWeight: 5 },
+  { key: "health", divisions: ["health", "personal_misc", "insurance_finance", "education"], icon: "HeartPulse", bucket: "essential", cadence: "monthly", defaultWeight: 8 },
+  { key: "clothing", divisions: ["clothing"], icon: "Shirt", bucket: "essential", cadence: "monthly", defaultWeight: 4 },
+  { key: "eating_out", divisions: ["restaurants"], icon: "UtensilsCrossed", bucket: "quality", cadence: "daily", defaultWeight: 11 },
+  { key: "leisure", divisions: ["recreation", "alcohol_tobacco"], icon: "PartyPopper", bucket: "quality", cadence: "monthly", defaultWeight: 14 },
 ];
 
 export const CATEGORY_BY_KEY: Record<string, Category> = Object.fromEntries(

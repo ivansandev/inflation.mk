@@ -41,19 +41,14 @@
     "shareSuffix": "од кошничката"
   },
   "categories": {
-    "food": "Храна и безалкохолни пијалаци",
-    "alcohol_tobacco": "Алкохол и тутун",
-    "clothing": "Облека и обувки",
-    "housing": "Домување и комуналии",
-    "furnishings": "Покуќнина и опрема",
-    "health": "Здравство",
+    "groceries": "Намирници",
+    "housing": "Домување и сметки",
     "transport": "Транспорт",
-    "communications": "Информации и комуникации",
-    "recreation": "Рекреација, спорт и култура",
-    "education": "Образование",
-    "restaurants": "Ресторани и сместување",
-    "insurance_finance": "Осигурување и финансии",
-    "personal_misc": "Лична нега и друго"
+    "connectivity": "Телефон и интернет",
+    "health": "Здравје и нега",
+    "clothing": "Облека",
+    "eating_out": "Јадење надвор",
+    "leisure": "Забава и слободно време"
   },
   "methodology": {
     "title": "Како работи",

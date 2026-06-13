@@ -19,7 +19,10 @@ import ResultHeadline from "@/components/ResultHeadline";
 
 function officialWeightsToBasket(data: CpiData): Weights {
   return Object.fromEntries(
-    CATEGORIES.map((c) => [c.key, data.officialWeights[c.key] ?? 0]),
+    CATEGORIES.map((c) => [
+      c.key,
+      c.divisions.reduce((sum, div) => sum + (data.officialWeights[div] ?? 0), 0),
+    ]),
   );
 }
 
@@ -170,7 +173,7 @@ export default function Calculator({
                   return (
                     <CategoryRow
                       key={c.key}
-                      code={c.code}
+                      icon={c.icon}
                       name={name}
                       weight={weights[c.key] ?? 0}
                       defaultWeight={c.defaultWeight}
