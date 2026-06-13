@@ -5,7 +5,11 @@ import { DAYS_PER_MONTH, type Cadence } from "@/lib/categories";
 import { formatMoney, formatPercent, formatSignedPercent } from "@/lib/format";
 
 const SLIDER_STEPS = 100;
-const SLIDER_CENTER = SLIDER_STEPS / 2; // the average-family default sits here
+// Each slider runs from 0× (100% below the average) up to 5× the category's
+// average default. 1× — the average itself — therefore sits a fifth of the way
+// along the track.
+const MAX_MULTIPLE = 5;
+const AVERAGE_POSITION = SLIDER_STEPS / MAX_MULTIPLE; // 20
 
 export default function CategoryRow({
   code,
@@ -66,19 +70,19 @@ export default function CategoryRow({
   const secondary =
     cadence === "daily" ? `${monthlyText} ${currency} ${perMonth}` : null;
 
-  // The slider runs 0..100 with the average-family default anchored at the
-  // centre (50). Left of centre = below average, right = above (up to 2×).
+  // Map the stored weight onto the 0..100 track: 1× (the average) lands at
+  // AVERAGE_POSITION, 5× at the far right. Weights above 5× pin at the end.
   const position =
     defaultWeight > 0
       ? Math.min(
-          Math.round((weight / defaultWeight) * SLIDER_CENTER),
+          Math.round((weight / defaultWeight) * AVERAGE_POSITION),
           SLIDER_STEPS,
         )
       : weight > 0
         ? SLIDER_STEPS
         : 0;
   const handlePosition = (pos: number) =>
-    onChange(defaultWeight > 0 ? (defaultWeight * pos) / SLIDER_CENTER : pos);
+    onChange(defaultWeight > 0 ? (defaultWeight * pos) / AVERAGE_POSITION : pos);
 
   return (
     <div className="py-3 sm:grid sm:grid-cols-[2.1rem_minmax(0,1fr)_9.5rem_3.2rem] sm:items-center sm:gap-x-4">
@@ -101,7 +105,8 @@ export default function CategoryRow({
         <div className="relative flex items-center">
           <span
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 h-2.5 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-faint"
+            className="pointer-events-none absolute top-1/2 h-2.5 w-0.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-faint"
+            style={{ left: `${AVERAGE_POSITION}%` }}
           />
           <input
             type="range"
