@@ -11,9 +11,10 @@ import {
   type Bucket,
   type Weights,
 } from "@/lib/categories";
-import { bucketShare, computeInflation } from "@/lib/inflation";
+import { bucketShare, computeInflation, inflationSeries } from "@/lib/inflation";
 import { formatMoney, formatPercent } from "@/lib/format";
 import CategoryRow from "@/components/CategoryRow";
+import InflationChart from "@/components/InflationChart";
 import ResultHeadline from "@/components/ResultHeadline";
 
 function officialWeightsToBasket(data: CpiData): Weights {
@@ -40,6 +41,11 @@ export default function Calculator({
     [data, weights],
   );
 
+  const series = useMemo(
+    () => inflationSeries(data, weights),
+    [data, weights],
+  );
+
   const shareByBucket = useMemo(() => {
     const shares: Record<Bucket, number> = { essential: 0, quality: 0 };
     for (const b of BUCKETS) {
@@ -61,6 +67,16 @@ export default function Calculator({
         month={result.month}
         locale={locale}
       />
+
+      <section className="mt-14">
+        <h2 className="text-lg font-semibold tracking-tight">
+          {t("chart.title")}
+        </h2>
+        <p className="mt-1 max-w-md text-sm text-muted">
+          {t("chart.subtitle")}
+        </p>
+        <InflationChart series={series} locale={locale} />
+      </section>
 
       <div className="mt-14">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

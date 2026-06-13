@@ -15,6 +15,10 @@
     "vsLower": "{pp} pp lower than official",
     "vsEqual": "in line with the official rate"
   },
+  "chart": {
+    "title": "How your inflation tracked the official rate",
+    "subtitle": "Your current basket, applied to the last 10 years of official prices, next to the official rate."
+  },
   "basket": {
     "title": "Your basket",
     "hint": "Each slider starts at the average household — drag left or right to match how you spend, then set your monthly budget to see each share in real money. Shares are relative and always add up to 100%.",

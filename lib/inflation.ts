@@ -39,6 +39,23 @@ function yoyPercent(data: CpiData, key: string, month: string): number | null {
   return idx == null ? null : idx - 100;
 }
 
+// Weighted-average personal rate for a single month — the same formula as
+// computeInflation, without building per-category rows. Used by inflationSeries
+// so the chart line and the headline can never compute the rate differently.
+function personalRate(data: CpiData, weights: Weights, month: string): number {
+  let weightSum = 0;
+  let weighted = 0;
+  for (const c of CATEGORIES) {
+    const w = weights[c.key] ?? 0;
+    if (w <= 0) continue;
+    const yoy = yoyPercent(data, c.key, month);
+    if (yoy == null) continue;
+    weightSum += w;
+    weighted += w * yoy;
+  }
+  return weightSum > 0 ? weighted / weightSum : 0;
+}
+
 export function computeInflation(
   data: CpiData,
   weights: Weights,
@@ -78,6 +95,37 @@ export function bucketShare(
   return result.rows
     .filter((r) => bucketKeys.has(r.key))
     .reduce((sum, r) => sum + r.share, 0);
+}
+
+export interface SeriesPoint {
+  /** Month code, e.g. "2026M05". */
+  month: string;
+  /** Personal rate that month, in percent (current basket × that month's prices). */
+  personal: number;
+  /** Official headline CPI that month, in percent. */
+  official: number;
+}
+
+/**
+ * Personal vs official year-over-year rate for each month, for plotting a time
+ * series. The personal line applies the user's *current* basket to each past
+ * month, so it answers "how would my basket have tracked the official rate?".
+ *
+ * Defaults to the trailing 10 years (120 months) ending at the latest month.
+ * Months with no official total are skipped.
+ */
+export function inflationSeries(
+  data: CpiData,
+  weights: Weights,
+  months: string[] = data.months.slice(-120),
+): SeriesPoint[] {
+  const points: SeriesPoint[] = [];
+  for (const month of months) {
+    const official = yoyPercent(data, "total", month);
+    if (official == null) continue;
+    points.push({ month, personal: personalRate(data, weights, month), official });
+  }
+  return points;
 }
 
 /** "2026M05" → { year: 2026, month: 5 } (1-based). */

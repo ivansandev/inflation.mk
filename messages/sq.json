@@ -15,6 +15,10 @@
     "vsLower": "{pp} pp më ulët se zyrtari",
     "vsEqual": "njësoj si norma zyrtare"
   },
+  "chart": {
+    "title": "Si e ndoqi inflacioni yt normën zyrtare",
+    "subtitle": "Shporta jote aktuale, e zbatuar mbi çmimet zyrtare të 10 viteve të fundit, krahasuar me normën zyrtare."
+  },
   "basket": {
     "title": "Shporta jote",
     "hint": "Çdo rrëshqitës nis nga familja mesatare — tërhiqe majtas ose djathtas sipas mënyrës si shpenzon, pastaj vendos buxhetin mujor për të parë sa është secila pjesë në para. Pjesët janë relative dhe gjithmonë mblidhen në 100%.",
