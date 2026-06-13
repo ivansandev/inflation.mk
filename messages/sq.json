@@ -24,8 +24,16 @@
   },
   "breakdown": {
     "title": "Inflacioni sipas kategorisë",
+    "intro": "Trendet zyrtare të çmimeve dhe pagave në Maqedoninë e Veriut gjatë 5 viteve të fundit.",
+    "gridTitle": "Ndryshimi i çmimeve sipas kategorisë",
     "subtitle": "Si kanë lëvizur çmimet në secilën pjesë të shportës zyrtare gjatë 5 viteve të fundit, krahasuar me normën zyrtare. Të renditura sipas ndryshimit më të fundit vjetor.",
     "legendCategory": "Kategoria"
+  },
+  "wages": {
+    "title": "Pagat kundrejt inflacionit",
+    "subtitle": "Rritja vjetore e pagës mesatare neto, krahasuar me normën zyrtare të inflacionit. Kur vija e plotë është mbi atë me vija, pagat i kaluan çmimet.",
+    "seriesLabel": "Paga mesatare neto",
+    "latest": "Paga mesatare neto tani është {amount} {currency} ({month})."
   },
   "basket": {
     "title": "Shporta jote",

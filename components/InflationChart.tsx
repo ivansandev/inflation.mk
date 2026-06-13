@@ -24,11 +24,19 @@ function niceStep(range: number, target: number): number {
 export default function InflationChart({
   series,
   locale,
+  seriesLabel,
+  officialLabel,
 }: {
   series: SeriesPoint[];
   locale: string;
+  /** Label for the solid line (defaults to the personal-inflation eyebrow). */
+  seriesLabel?: string;
+  /** Label for the dashed reference line (defaults to "Official CPI"). */
+  officialLabel?: string;
 }) {
   const t = useTranslations();
+  const sLabel = seriesLabel ?? t("hero.eyebrow");
+  const oLabel = officialLabel ?? t("hero.officialLabel");
   const plotRef = useRef<HTMLDivElement>(null);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -81,20 +89,20 @@ export default function InflationChart({
     <figure
       className="mt-6"
       role="img"
-      aria-label={`${t("hero.eyebrow")} ${formatSignedPercent(
+      aria-label={`${sLabel} ${formatSignedPercent(
         last.personal,
         locale,
-      )}, ${t("hero.officialLabel")} ${formatSignedPercent(last.official, locale)}`}
+      )}, ${oLabel} ${formatSignedPercent(last.official, locale)}`}
     >
       {/* Legend */}
       <figcaption className="mb-3 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-muted">
         <span className="inline-flex items-center gap-2">
           <span className="h-0.5 w-5 rounded-full bg-foreground" />
-          {t("hero.eyebrow")}
+          {sLabel}
         </span>
         <span className="inline-flex items-center gap-2">
           <span className="h-0 w-5 border-t-2 border-dashed border-faint" />
-          {t("hero.officialLabel")}
+          {oLabel}
         </span>
       </figcaption>
 
@@ -213,7 +221,7 @@ export default function InflationChart({
               <div className="flex items-center justify-between gap-4">
                 <span className="inline-flex items-center gap-1.5 text-muted">
                   <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
-                  {t("hero.eyebrow")}
+                  {sLabel}
                 </span>
                 <span className="num text-foreground">
                   {formatSignedPercent(hp.personal, locale)}
@@ -222,7 +230,7 @@ export default function InflationChart({
               <div className="mt-0.5 flex items-center justify-between gap-4">
                 <span className="inline-flex items-center gap-1.5 text-muted">
                   <span className="h-1.5 w-1.5 rounded-full bg-faint" />
-                  {t("hero.officialLabel")}
+                  {oLabel}
                 </span>
                 <span className="num text-muted">
                   {formatSignedPercent(hp.official, locale)}

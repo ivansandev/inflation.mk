@@ -24,8 +24,16 @@
   },
   "breakdown": {
     "title": "Inflation by category",
+    "intro": "Official price and pay trends in North Macedonia over the last 5 years.",
+    "gridTitle": "Price change by category",
     "subtitle": "How prices in each part of the official basket have moved over the last 5 years, next to the headline rate. Sorted by the latest year-on-year change.",
     "legendCategory": "Category"
+  },
+  "wages": {
+    "title": "Wages vs inflation",
+    "subtitle": "Year-over-year growth of the average net wage, next to the official inflation rate. When the solid line is above the dashed one, pay outpaced prices.",
+    "seriesLabel": "Average net wage",
+    "latest": "Average net wage is now {amount} {currency} ({month})."
   },
   "basket": {
     "title": "Your basket",
